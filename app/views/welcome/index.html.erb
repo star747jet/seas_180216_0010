@@ -1,0 +1,35 @@
+<!--<div align="center" style="padding-top:30px" >
+	<div style="background: #6f4688;
+    padding: 20px;
+    width: 700px;
+    ">
+	<img src="/siit_logo.png">
+</div>-->
+<div style="height:477px">
+<h1 style="color:#666699;padding-top:80px" align="center";>School Equipment Auditing System<br></h1>
+
+<div align="center" style="padding-top:80px" >
+	<div style="background: #9900cc;
+    padding: 20px;
+    width: 700px;
+    border-radius: 5px
+    ">
+
+<%= form_tag equipment_search_path ,class: "navbar-form", role: "search" do %>
+	<%= label_tag 'Search Term :' , nil, style: 'color:white' %>&nbsp;
+		<%= text_field_tag 'keyword',"", placeholder: 'Equipment search', style: 'width:400px' %>
+		&nbsp;<%= button_tag(type: 'submit') do %>
+                	<i class="glyphicon glyphicon-search"></i>
+                <% end %>
+        &nbsp;<%= button_tag(type: 'submit') do %>
+                    <i>List all</i>
+                <% end %>
+            <!--<%= label_tag 'filter by :' , nil, style: 'color:white' %>&nbsp;
+            <%= select_tag 'select1',options_for_select(%w[ALL Name ID Borrower]) %>&nbsp;-->
+                
+<% end %>
+
+</div>
+</div>
+</div>
+

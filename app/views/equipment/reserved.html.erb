@@ -1,0 +1,22 @@
+<h3>Reserved Item</h3>
+<table class="table table-bordered table-hover table-condensed">
+	<tr style="background-color:lightgrey">
+		<th>Item name</th>
+		<th>Item ID</th>
+		<th>Result</th>
+		<th></th>
+	</tr>
+	<%= @name %>
+	<% Equipment.where(reserved_by: @name).find_each do |e| %>
+	<tr>
+	    <td><%= e.equip_name %></td>  
+		<td><%= e.equip_id %></td>
+		<td><%= e.process %></td>
+		<% if e.process == 'Pending' %>
+			<td><%= link_to 'Cancel', equipment_cancel_path(:id => e.equip_id), class: 'advance_search' %></td>
+		<% else %>
+			<td></td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>

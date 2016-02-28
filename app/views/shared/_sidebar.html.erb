@@ -1,0 +1,42 @@
+<div class="navbar navbar-default" style="background-color:lightgrey; border-color:#e1b3ff;border-radius:0px" >
+      <div class="nav-collapse" >
+        <ul class="nav">
+          <br>
+          <li>
+            <table align="center">
+              <tr>
+                <td>
+            <div class: "navbar-form" sytle="inline">
+            <%= form_tag equipment_search_path,method: 'get', role: "search" do %>
+              <div align="center" style="inline-block">
+                <%= text_field_tag 'keyword',"", placeholder: 'Search',style: "width:100%"%>
+              </td>
+              <td>
+                <%= button_tag(type: 'submit', data: { status: 'Available' }) do %>
+                  <i class="glyphicon glyphicon-search"></i>
+                <% end %>
+              
+            <% end %>
+          </td>
+          <td>
+              <%= form_tag equipment_decoder_path, method: 'get' do %>
+               <%= button_tag(type: 'submit') do %>
+                  <i class="glyphicon glyphicon-qrcode"></i>
+                <% end %>
+                </div>
+            <% end %>
+          </div>
+        </td>
+        </tr>
+        </table><br>
+          </li>
+          <li align="center"></li>
+          <li class="jumbotron" align="center" style="border-radius:0px; color:grey">
+            <marquee behavior="scroll" direction="up" style="height:70px;" scrollamount="2">Search history<br>(COMING SOON)"</marquee>
+          </li>
+          <li class="jumbotron" align="center" style="border-radius:0px; color:grey">
+            <marquee behavior="scroll" direction="up" style="height:70px;" scrollamount="1">Announcement<br>(COMING SOON)"</marquee>
+          </li>
+        </ul>
+      </div>
+</div>

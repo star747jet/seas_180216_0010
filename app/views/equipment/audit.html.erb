@@ -1,0 +1,48 @@
+<h3>User Request</h3>
+<table class="table table-bordered table-hover table-condensed">
+	<tr style="background-color:lightgrey">
+		<th><b>Item Name</b></th>
+		<th><b>Item ID</b></th>
+		<th><b>Applicant</b></th>
+		<th><b>Request Date</b></th>
+		<th><b>Receive at</b></th>
+		<th><b>Status</b></th>
+		<th><b>Approve request</b></th>
+	</tr>
+	<% @equipments = Equipment.all.where("process = 'pending'") %>
+	<% @equipments.each do |e| %>
+	<tr>
+		<td><%= e.equip_name %></td>
+		<td><%= e.equip_id %></td>
+		<td><%= e.reserved_by %></td>
+		<td><%= e.req_date %></td>
+		<td><%= e.location %></td>
+		<td><%= e.process %></td>
+		<td><%= link_to 'Approve', equipment_approve_path(id: e.equip_id), class: 'advance_search' %></td>
+	</tr>
+	<% end %>
+</table>
+<h3>Approved Request</h3>
+<table class="table table-bordered table-hover">
+	<tr style="background-color:lightgrey">
+		<th><b>Item Name</b></th>
+		<th><b>Item ID</b></th>
+		<th><b>Applicant</b></th>
+		<th><b>Request Date</b></th>
+		<th><b>Receive at</b></th>
+		<th><b>Status</b></th>
+		<th></th>
+	</tr>
+	<% @equipments = Equipment.all.where("process = 'Received'") %>
+	<% @equipments.each do |e| %>
+	<tr>
+		<td><%= e.equip_name %></td>
+		<td><%= e.equip_id %></td>
+		<td><%= e.reserved_by %></td>
+		<td><%= e.req_date %></td>
+		<td><%= e.location %></td>
+		<td><%= e.process %></td>
+		<td><%= link_to 'Return', equipment_return_path(id: e.equip_id), class: 'advance_search' %></td>
+	</tr>
+	<% end %>
+</table>

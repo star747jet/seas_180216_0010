@@ -1,0 +1,69 @@
+<style>
+	.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+	}
+    
+    li{
+    	
+    }
+
+    img {
+    	transition: -webkit-transform 0.25s ease;
+	}
+
+	img:active {
+    -webkit-transform: scale(2);
+
+	}
+}
+</style>
+
+<div class="container" style="padding-left:0; width: 100%">
+	<div class="col-sm-3" style="padding-left" >
+	</div>
+		<div class="col-sm-9">
+	  	</div>
+  	</div>
+
+</div>
+
+<div align="center" style="display: inline-block;vertical-align: bottom"><img src="/headshots/<%= params[:id] %>.jpg" style="width: 350px; height: auto;padding-top:5px; padding-left:5px; transform: rotate(90deg)" 
+	></div>
+
+	<div style="display: inline-block">
+	
+<!--<%= link_to 'Back', equipment_search_path(), class: 'advance_search'%>-->
+<div><br><br><br><br><br>
+	<table>
+		<tr>
+			<ul>
+				<li><b>Item name : </b></li> <%= params[:name] %>
+				<li><b>Item id : </b></li> <%= params[:id] %>
+				<li><b>Item description : </b></li> n/a</b>
+				<!--<li><b>Number of available : </b></li> n/a-->
+				<li><b>Item condition : </b></li> n/a
+			</ul>
+		</tr>
+	</table>
+	<% session[:id] = params[:id] %>
+	<% flash.each do |key, msg| %>
+   
+<% end %>
+<%= button_to 'Take a photo', takeashot_path %><br>
+	<%= form_tag equipment_upload_path , { :multipart => true } do %>
+		<%=	 file_field_tag 'upload[file]' %>
+		<%= button_tag(type: 'submit') do %>
+    	Submit
+    	<% end %>
+    <% end %>
+
+    
+   	<%= session[:img] %><br>
+	<%= link_to 'Back', equipment_advance_path, class: 'advance_search' %>
+	<br>
+</div>
+</div>

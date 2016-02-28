@@ -1,0 +1,24 @@
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
+
+<p>
+	<!--<img src="/headshots/<%= @article.text %>.jpg">-->
+	<img src="/headshots/headshot_capture_8205_1448978807.jpg">
+</p>
+<%= link_to 'Take a photo', takeashot_path %>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+ 
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
+

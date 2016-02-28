@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  equip_name: MyString
+  equip_id: MyString
+  type: 
+
+two:
+  equip_name: MyString
+  equip_id: MyString
+  type: 

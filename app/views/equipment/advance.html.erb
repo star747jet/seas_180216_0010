@@ -1,0 +1,37 @@
+<h3>Advance Search</h3>
+<%= form_tag equipment_search_path ,class: "navbar-form", role: "search" do %>
+  <table>
+    <tr>
+   	<div align="left" style="padding-top:20px">
+   		<% @type_name = Equipment.uniq.pluck(:type_name) %>
+   		<td style="padding:5px"><%= label_tag 'Keyword :' %></td><td><%= text_field_tag 'keyword' %></td>
+    </tr>
+    <tr>
+   		<td style="padding:5px"><%= label_tag 'Equipment ID :' %></td><td><%= text_field_tag 'id' %></td>
+    </tr>
+    <tr>
+    	<td style="padding:5px"><%= label_tag 'Location :' %></td><td><%= select_tag 'location', options_for_select(Equipment.uniq.pluck(:location)),:include_blank => "All" %></td>
+    </tr>
+    <tr>
+    	<td style="padding:5px"><%= label_tag 'Type :' %></td><td><%= select_tag 'type', options_for_select(Equipment.uniq.pluck(:type_name)),:include_blank => "All"%></td>
+    </tr>
+    <tr>
+    	<td style="padding:5px"><%= label_tag 'Status :' %></td><td><%= select_tag 'status', options_for_select(Equipment.uniq.pluck(:equip_status)),:include_blank => "All" %></td>
+    </tr>
+    <tr>
+    	<td style="padding:5px"><%= label_tag 'Belong to :' %></td><td><%= select_tag 'department', options_for_select(Equipment.uniq.pluck(:department)),:include_blank => "All"%> department</td>
+    </tr>
+
+    <tr>
+    <td></td>
+    <td>
+    	<%= button_tag(type: 'submit') do %>
+    	Submit
+    	<% end %>
+    </td>
+    </tr>
+    </div><br>
+    </tr>
+  </table>
+<% end %>
+

@@ -1,0 +1,100 @@
+<h1>Search result</h1>
+<%= session[:test_string] %>
+<%= session[:qr] %>
+
+<div style="float:left">
+<% if params[:keyword].present? %>
+	<p style="color:grey">Result for "<b><%= params[:keyword] %></b>"</p> 
+<% end %>
+</div>
+<div>
+<% if params[:department].present? %>
+	<p style="color:grey">, "<b><%= params[:department] %></b>"</p> 
+<% end %>
+</div><br>
+<table class="table table-bordered table-hover table-condensed" >      
+  <tr style="background-color:lightgrey">                          
+    <th><b>Item Name</b></th>
+    <th><b>ID</b></th>
+    <th><b>Type</b></th>
+    <% if params[:location] == "" %>
+    	<% @location = "Rangsit" %>
+    <% elsif params[:location] == "Rangsit" %>
+    	<% @location = "Bangkadi" %>
+    <% else %>
+     	<% @location = "" %>
+    <% end %>
+    <th><b><%= link_to 'Location', equipment_search_path(
+    	:keyword => params[:keyword],
+    	:type => params[:type],
+    	:location => @location,
+    	:status => params[:status]
+    ), class: 'advance_search' %></b>
+</th>
+    <th><b>Detail</b></th>
+    <% if params[:status] == "Available" %>
+    	<% @status = "Reserved" %>
+    <% elsif params[:status] == "Reserved" %>
+    	<% @status = "" %>
+    <% else %>
+    	<% @status = "Available" %>
+    <% end %>
+    <th><b><%= link_to 'Status', equipment_search_path(
+    	:keyword => params[:keyword],
+    	:type => params[:type],
+    	:location => params[:location],
+    	:status => @status
+    	) ,class: 'advance_search'%></b>
+    </th>
+    <th></th>
+  </tr>
+<%= @id %>
+<%= @qqr %>
+<% @equipments = Equipment.all
+	if params[:keyword].present?
+		if params[:keyword].include? "-"
+			@equipments = @equipments.where(["equip_id LIKE ?","%#{params[:keyword]}%"]) 
+		else
+			@equipments = @equipments.where(["equip_name LIKE ?","%#{params[:keyword]}%"]) 
+		end
+    else
+        @equipments = Equipment.all
+	end
+	@equipments = @equipments.where(["equip_id LIKE ?","%#{params[:id]}%"]) if params[:id].present?
+	@equipments = @equipments.where(["type_name = ?",params[:type]]) if params[:type].present?
+	@equipments = @equipments.where(["equip_status = ?",params[:status]]) if params[:status].present?
+	@equipments = @equipments.where(["location = ?",params[:location]]) if params[:location].present?
+	@equipments = @equipments.where(["department = ?",params[:department]]) if params[:department].present?
+
+%>
+<%= @include %>
+	<% @equipments.each do |e| %>
+	<tr>
+		<td><%= link_to e.equip_name, equipment_info_path(:id => e.equip_id, :name => e.equip_name), class: 'advance_search' %></td>
+		<td><%= e.equip_id %></td>
+		<td><%= e.type_name %></td>
+		<td><%= e.location %></td>
+		<td><%= link_to 'View', equipment_info_path(:id => e.equip_id, :name => e.equip_name), class: 'advance_search' %></td>
+	    <td><%= e.equip_status %></td>
+        <% if e.equip_status != 'Reserved' %>
+
+
+        <% if current_user.present? %>
+        <% @name = current_user.name %>
+      <% else %>
+        <% @name = ' ' %>
+      <% end %>
+      <% @u = User.find_by(name: @name) %>
+      <% if @u.user_type == 'admin' %>
+         <td><%= link_to 'Request', equipment_doReserve_path(:id => e.equip_id, :name => e.equip_name), class: 'advance_search' %></td>
+      <% elsif @u.user_type == 'user' %>
+         <td><%= link_to 'Request', equipment_doReserve_path(:id => e.equip_id, :name => e.equip_name), class: 'advance_search' %></td>
+      <% else %>
+        <td></td>
+      <% end%>
+
+           <% end %>
+	</tr>
+	<% end %>
+</table>
+<%= link_to 'Back', equipment_advance_path ,class: 'advance_search'%><br><br>
